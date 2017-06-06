@@ -1,7 +1,7 @@
 const assert = require('assert')
 const User = require('../src/user')
 
-describe('Reading users out of a the Database', () => {
+describe('Reading users out of a the Database', (done) => {
     let joe;
 
     beforeEach((done) => {
@@ -11,7 +11,7 @@ describe('Reading users out of a the Database', () => {
 
     });
 
-    it('finds all Users with a name of joe ', (done) => {
+    it('finds all Users with a name of joe ', () => {
         User.find({ name: 'joe' })
             .then((users) => {
                 console.log(users)

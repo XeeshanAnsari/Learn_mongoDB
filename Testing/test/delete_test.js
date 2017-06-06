@@ -1,16 +1,16 @@
 const asset  = require('assert');
 const User = require('../src/user');
 
-describe('Deleteing Record', ()=>{
+describe('Deleteing Record',(done)=>{
     let joe;
 
-    beforeEach((done) =>{
+    beforeEach(() =>{
         joe = new User({name: 'joe'})
         joe.save()
         .then(()=> done())
     }) 
 
-    it('model instance remove ', (done)=>{
+    it('model instance remove ', ()=>{
         joe.remove()
         .then(() => User.findOne({name: 'joe'}))
         .then((user) => {
@@ -36,8 +36,8 @@ describe('Deleteing Record', ()=>{
         })
     })
     
-     it('class method findByIdAndRemove ', ()=>{
-         User.fByIdAndRemove(joe._id)
+     it('class method findByIdAndRemove ',()=>{
+         User.findByIdAndRemove(joe._id)
         .then(()=> User.findOne({name: 'joe'}))
         .then((user) => {
            assert(user === null)
