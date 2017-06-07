@@ -4,11 +4,26 @@ module.exports = {
         res.send({hi:'there'})
     },
 
-    create(req, res){
+    create(req, res , next){
        const DriverProps = req.body;
-       console.log(DriverProps)
+    
        Driver.create(DriverProps)
        .then(driver => res.send(driver))
-       .catch(error=>console.log(error))
-    }
+         .catch(next)
+    },
+
+    edit(req, res, nest){
+        const driverId = req.params.id;
+        const driverProps = req.body;
+
+        Driver.findByIdAndUpdate({_id : driverId} , driverProps)
+        .then(() =>{
+            Driver
+            .findById({_id: driverId})
+        }) 
+        .then(driver => res.send(driver)) 
+        .catch(next)  
+}
+
+
 }

@@ -19,9 +19,22 @@ describe('Driver controller ', (done) => {
 
                 })
         })
+     })
 
+     it('PUT to /api/drriver/id edit an existing driver', () =>{
+         const driver = new Driver({email: 't@t.com', driving: false})
 
-
-
-    })
+         driver.save().then(()=>{
+             request(app)
+             .put('api/drivers/${driver._id}')
+             .send({driving : true})
+             .end(() =>{
+                 Driver.findOne({email:'t@t.com'})
+                  .then(driver =>{
+                      assert(driver.driving === ture)
+                      done();
+                  })
+             })
+         })
+     })
 })
