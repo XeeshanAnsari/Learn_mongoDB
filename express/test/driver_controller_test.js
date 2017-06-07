@@ -37,4 +37,16 @@ describe('Driver controller ', (done) => {
              })
          })
      })
+
+     it('Delete to /api/drivers/id can delete a driver ', ()=>{
+         request(app)
+         .delete('/api/drivers/${drivers._id}')
+         .end(() =>{
+             Driver.findOne({ email: 'test@test.com'})
+             .then((driver) =>{
+                 assert(drivers === null)
+                 done();
+             })
+         })
+     })
 })
