@@ -18,19 +18,18 @@ module.exports = {
 
         Driver.findByIdAndUpdate({ _id: driverId }, driverProps)
             .then(() => {
-                Driver
-                    .findById({ _id: driverId })
+                Driver.findById({ _id: driverId })
             })
             .then(driver => res.send(driver))
             .catch(next)
     },
 
     delete(req, res, next) {
-       const driverId = req.params.id;
+        const driverId = req.params.id;
 
-       Driver.findByIdAndRemove({ _id: driverId})
-       .then(driver => res.status(204).send(driver))
-       .catch(next)
+        Driver.findByIdAndRemove({ _id: driverId })
+            .then(driver => res.status(204).send(driver))
+            .catch(next)
     }
 
 
