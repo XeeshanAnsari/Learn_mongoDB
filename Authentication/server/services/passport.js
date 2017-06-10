@@ -3,7 +3,7 @@ const User = require('../models/user')
 const config = require('../config')
 
 const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport').ExtractJwt;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 //setup option for JWT Strategy
 

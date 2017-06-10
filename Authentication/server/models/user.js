@@ -12,27 +12,26 @@ const userSchema = new Schema({
 // Before saving a model , run this function
 userSchema.pre('save ', function(next){
     // get access to the user model
-    const user = this;
+    const users = this;
 
-
-   //generate a salt then run callback
+  //generate a salt then run callback
     bcrypt.genSalt(10 , function(err , salt){
         if(err) { return next(err)}
         
         // hash (encrypt ) our passord using the salt
-       bcrypt.hash(user.password , salt , null , function(err , hash){
+       bcrypt.hash(users.password , salt , null , function(err , hash){
           if(err) { return next(err)}
      
         // overwrite plane password to  encrypt pass
-          user.password = hash ;
+          users.password = hash ;
           next();           
        })
     })
 
 })
 
-const ModelClass = mongoose.model('user', userSchema)
+const User = mongoose.model('user', userSchema)
 
 
-module.exports = ModelClass
+module.exports = User
 
